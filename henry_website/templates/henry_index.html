@@ -1,0 +1,17 @@
+<html>
+<head>
+<title> Pet Henry </title>
+
+<meta name="viewport" content="width=device.width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+<h1 id="number">Henry has been pet : {{number}} times!</h1>
+<button onclick="increment()">Pet Henry</button>
+<h2 id="personal">Your display name is : {{display_name}} and you have pet him : {{pet_count}} times!</h2>
+<div id="leaderboard-container"></div>
+<p><img src="{{henry_pic}}"></p>
+<script src="/static/script.js"></script>
+</body>
