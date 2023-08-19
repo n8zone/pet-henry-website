@@ -8,10 +8,20 @@
 </head>
 
 <body>
-<h1 id="number">Henry has been pet : {{number}} times!</h1>
-<button onclick="increment()">Pet Henry</button>
-<h2 id="personal">Your display name is : {{display_name}} and you have pet him : {{pet_count}} times!</h2>
-<div id="leaderboard-container"></div>
-<p><img src="{{henry_pic}}"></p>
+    <div id="main-container">
+        <div id="petCount">
+            <h1 id="number">Henry has been pet : {{number}} times!</h1>
+            <h2>Your display name is : {{display_name}}</h2>
+            <h2 id="personal">You have pet him : {{pet_count}} times!</h2>
+        </div>
+        <div id="leaderboard-image">
+            <div id="pet-section">
+                <img src="{{henry_pic}}" id="henry-image">
+                <audio src="../static/honk.mp3" id="honk"></audio>
+            </div>
+            <div id="leaderboard-container"></div>
+        </div>
+    </div>
+
 <script src="/static/script.js"></script>
 </body>

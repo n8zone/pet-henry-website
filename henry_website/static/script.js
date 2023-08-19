@@ -1,3 +1,4 @@
+
 function increment() {
     fetch('/increment', {
 	method: 'POST'
@@ -6,7 +7,7 @@ function increment() {
     .then(data => {
 	document.getElementById('number').innerText = `Henry has been pet : ${data.number} times!`;
     });
-    myPats = myPats + 1;
+    myPats = myPats + 1
     updateSelf()
 }
 
@@ -115,6 +116,9 @@ function setupLeaderboard(data) {
 
 var myPats;
 
+var honkAudio = new Audio('../static/honk.mp3');
+var boomAudio = new Audio('../static/boom.mp3');
+
 (async () => {
     myPats = await getSelfPats();
     console.log(myPats);
@@ -124,3 +128,50 @@ var myPats;
     setInterval(syncNumber, 600)
     
 })();
+
+function scoldUserForSinfulAction() {
+    boomAudio.currentTime = 0.25;
+    boomAudio.play();
+    var foxDiv = document.createElement('div');
+    foxDiv.style.backgroundImage = "url('../static/togif.png')";
+    foxDiv.style.position = 'fixed';
+    foxDiv.style.top = '0';
+    foxDiv.style.left = '0';
+    foxDiv.style.width = '100%';
+    foxDiv.style.height = '100%';
+    foxDiv.style.backgroundSize = '100% 100%';
+    document.body.appendChild(foxDiv);
+}
+
+document.getElementById('pet-section').addEventListener('click', function(event) {
+    var x = event.offsetX;
+    var y = event.offsetY;
+    
+    var illegalTouchX = 158;
+    var illegalTouchY = 483;
+    var illegalRadius = 25;
+    
+    var distanceX = x - illegalTouchX;
+    var distanceY = y - illegalTouchY;
+    var illegalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // holy crap its the pythagoreonie thereom
+    if(illegalDistance <= illegalRadius) {
+        scoldUserForSinfulAction();
+        return;
+    }
+
+    var happyTouchX = 138;
+    var happyTouchY = 225;
+    var happyTouchRadius = 8;
+
+    var happyX = x - happyTouchX;
+    var happyY = y - happyTouchY;
+    var happyDistance = Math.sqrt(happyX * happyX + happyY * happyY);
+    if(happyDistance <= happyTouchRadius) {
+        honkAudio.currentTime = 0;
+        honkAudio.play();
+    }
+
+    //alert(`${x},${y}`);
+
+    increment();
+});
