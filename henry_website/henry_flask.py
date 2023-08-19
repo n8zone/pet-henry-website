@@ -65,6 +65,8 @@ def get_user_display_name(user_id):
 
 @app.route('/')
 def index():
+    user_ip = request.remote_addr
+
     user_id = request.cookies.get('user_id')
     if (user_id is None):
         print("No uuid!")
@@ -81,6 +83,7 @@ def index():
     display_name = get_user_display_name(user_id)
     resp = make_response(render_template("henry_index.html",henry_pic="/static/henry.jpeg", number=number,pet_count=pet_count, display_name=display_name))
     resp.set_cookie('user_id', user_id)
+    resp.set_cookie('display_name', display_name)
     return resp
 
 @app.route('/increment', methods = ['POST'])
@@ -112,12 +115,14 @@ def get_user_pets():
 def get_number():
     return jsonify(number=number)
 
+
+
 @app.route('/get_leaderboard')
 def get_top_petters():
     user_id = request.cookies.get('user_id')
     conn = sqlite3.connect('henry.db')
     c = conn.cursor()
-    c.execute("SELECT count, display_name, DENSE_RANK() OVER (ORDER BY count DESC) AS rank FROM pets WHERE display_name IS NOT NULL ORDER BY count DESC LIMIT 5")
+    c.execute("SELECT count, display_name, DENSE_RANK() OVER (ORDER BY count DESC) AS rank FROM pets WHERE display_name IS NOT NULL ORDER BY count DESC LIMIT 10")
     raw_leaderboard = c.fetchall()
     leaderboard = [{'rank': rank, 'count': count, 'display_name' : display_name} for count, display_name, rank in raw_leaderboard]
 
