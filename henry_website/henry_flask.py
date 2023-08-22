@@ -66,7 +66,7 @@ def get_user_display_name(user_id):
 @app.route('/')
 def index():
     user_ip = request.remote_addr
-
+    print("henry 0.8.0")
     user_id = request.cookies.get('user_id')
     if (user_id is None):
         print("No uuid!")
@@ -138,11 +138,13 @@ def get_top_petters():
 
     c.execute(query, (user_id,))
     user_rank = c.fetchone()
+    print("user_rank: ", user_rank)
     leaderboard.append({'rank': user_rank[0], 'count': user_rank[1], 'display_name' : user_rank[2]})
     
     conn.close()
 
     return jsonify(leaderboard)
 
+print("henry v0.8.0")
 #get_top_petters()
 app.run(host="0.0.0.0", port=80)

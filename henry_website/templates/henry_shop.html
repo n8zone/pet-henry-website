@@ -1,0 +1,32 @@
+<html>
+<head>
+<title> Pet Henry </title>
+
+<meta name="viewport" content="width=device.width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="petCount">
+            <h1 id="number">Henry has been pet : {{number}} times!</h1>
+            <h2>Your display name is : {{display_name}}</h2>
+            <h2 id="personal">You have : {{pet_count}} coins!</h2>
+        </div>
+        <div id="color-scheme-selector">
+            <button onclick="selectColorScheme(0)">1</button>
+            <button onclick="selectColorScheme(1)">2</button>
+            <button onclick="selectColorScheme(2)">3</button>
+            <button onclick="selectColorScheme(3)">4</button>
+            <button onclick="selectColorScheme(4)">5</button>
+            <button onclick="selectColorScheme(5)">6</button>
+            <button onclick="selectColorScheme(6)">7</button>
+            <button onclick="selectColorScheme(7)">8</button>
+            <button onclick="selectColorScheme(8)">9</button>
+        </div>
+        <p>Color Schemes</p>
+    </div>
+
+<script src="/static/script.js"></script>
+</body>
