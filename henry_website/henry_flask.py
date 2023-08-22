@@ -82,7 +82,7 @@ def index():
     print(pet_count)
     display_name = get_user_display_name(user_id)
     resp = make_response(render_template("henry_index.html",henry_pic="/static/henry.jpeg", number=number,pet_count=pet_count, display_name=display_name))
-    resp.set_cookie('user_id', user_id)
+    resp.set_cookie('user_id', user_id, max_age=60*60*24*365)
     resp.set_cookie('display_name', display_name)
     return resp
 
