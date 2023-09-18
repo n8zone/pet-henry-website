@@ -65,7 +65,6 @@ def get_user_display_name(user_id):
 
 @app.route('/')
 def index():
-    user_ip = request.remote_addr
     print("henry 0.8.0")
     user_id = request.cookies.get('user_id')
     if (user_id is None):
